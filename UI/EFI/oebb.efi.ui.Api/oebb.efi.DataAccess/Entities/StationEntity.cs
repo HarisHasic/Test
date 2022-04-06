@@ -1,6 +1,6 @@
-﻿namespace oebb.efi.DataAccess.Models
+﻿namespace oebb.efi.DataAccess.Entities
 {
-    public class Station
+    public class StationEntity
     {        
         public long Id { get; set; }
         public string Shortcut { get; set; } = string.Empty;

@@ -1,11 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using oebb.efi.DataAccess.Entities;
 
 namespace oebb.efi.DataAccess.Models.Configuration
 {
-    public class StationConfiguration : IEntityTypeConfiguration<Station>
+    public class StationEntityConfiguration : IEntityTypeConfiguration<StationEntity>
     {
-        public void Configure(EntityTypeBuilder<Station> builder)
+        public void Configure(EntityTypeBuilder<StationEntity> builder)
         {
             builder.ToTable("Station");
             builder.HasKey(x => x.Id);
@@ -15,9 +16,9 @@ namespace oebb.efi.DataAccess.Models.Configuration
             builder.Property(x => x.SearchTerm).IsRequired().HasMaxLength(50);
 
             builder.HasData(
-                new Station { Id = 1, Shortcut = "W", Description = "Wien", SearchTerm = "Wien" },
-                new Station { Id = 2, Shortcut = "S", Description = "Salzburg", SearchTerm = "Salzburg" },
-                new Station { Id = 3, Shortcut = "L", Description = "Linz", SearchTerm = "Linz" }
+                new StationEntity { Id = 1, Shortcut = "W", Description = "Wien", SearchTerm = "Wien" },
+                new StationEntity { Id = 2, Shortcut = "S", Description = "Salzburg", SearchTerm = "Salzburg" },
+                new StationEntity { Id = 3, Shortcut = "L", Description = "Linz", SearchTerm = "Linz" }
             );
         }
     }

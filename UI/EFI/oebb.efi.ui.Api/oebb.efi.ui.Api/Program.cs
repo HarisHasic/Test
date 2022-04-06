@@ -1,4 +1,5 @@
 using oebb.efi.DataAccess.Extensions;
+using oebb.efi.Domain.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddEfiContext(builder.Configuration.GetConnectionString("EfiContext"));
+
+builder.Services.AddDomainServices();
 
 var app = builder.Build();
 

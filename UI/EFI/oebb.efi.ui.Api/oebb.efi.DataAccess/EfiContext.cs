@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using oebb.efi.DataAccess.Models;
+using oebb.efi.DataAccess.Entities;
 
 namespace oebb.efi.DataAccess
 {
     public class EfiContext : DbContext
     {
-        public  DbSet<Station>? Stations { get; set; }
+        public virtual DbSet<StationEntity> Stations => Set<StationEntity>();
 
         public EfiContext() : base()
         {
