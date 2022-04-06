@@ -1,0 +1,15 @@
+version: '3.9'
+services:
+  efi-db:
+    image: postgres:14.2-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=efi
+      - POSTGRES_PASSWORD=1TsKx3m2DwywNH8oXQlA
+    ports:
+      - '5432:5432'
+    volumes: 
+      - db:/var/lib/postgresql/data 
+volumes:
+  db:
+    driver: local

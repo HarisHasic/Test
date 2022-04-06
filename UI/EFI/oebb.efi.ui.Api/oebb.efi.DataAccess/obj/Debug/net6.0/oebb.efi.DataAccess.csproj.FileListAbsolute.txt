@@ -1,0 +1,12 @@
+C:\Users\manfred.nowotny\source\repos\oebb.efi.ui.Api\oebb.efi.DataAccess\bin\Debug\net6.0\oebb.efi.DataAccess.deps.json
+C:\Users\manfred.nowotny\source\repos\oebb.efi.ui.Api\oebb.efi.DataAccess\bin\Debug\net6.0\oebb.efi.DataAccess.dll
+C:\Users\manfred.nowotny\source\repos\oebb.efi.ui.Api\oebb.efi.DataAccess\bin\Debug\net6.0\oebb.efi.DataAccess.pdb
+C:\Users\manfred.nowotny\source\repos\oebb.efi.ui.Api\oebb.efi.DataAccess\obj\Debug\net6.0\oebb.efi.DataAccess.csproj.AssemblyReference.cache
+C:\Users\manfred.nowotny\source\repos\oebb.efi.ui.Api\oebb.efi.DataAccess\obj\Debug\net6.0\oebb.efi.DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\manfred.nowotny\source\repos\oebb.efi.ui.Api\oebb.efi.DataAccess\obj\Debug\net6.0\oebb.efi.DataAccess.AssemblyInfoInputs.cache
+C:\Users\manfred.nowotny\source\repos\oebb.efi.ui.Api\oebb.efi.DataAccess\obj\Debug\net6.0\oebb.efi.DataAccess.AssemblyInfo.cs
+C:\Users\manfred.nowotny\source\repos\oebb.efi.ui.Api\oebb.efi.DataAccess\obj\Debug\net6.0\oebb.efi.DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\manfred.nowotny\source\repos\oebb.efi.ui.Api\oebb.efi.DataAccess\obj\Debug\net6.0\oebb.efi.DataAccess.dll
+C:\Users\manfred.nowotny\source\repos\oebb.efi.ui.Api\oebb.efi.DataAccess\obj\Debug\net6.0\refint\oebb.efi.DataAccess.dll
+C:\Users\manfred.nowotny\source\repos\oebb.efi.ui.Api\oebb.efi.DataAccess\obj\Debug\net6.0\oebb.efi.DataAccess.pdb
+C:\Users\manfred.nowotny\source\repos\oebb.efi.ui.Api\oebb.efi.DataAccess\obj\Debug\net6.0\ref\oebb.efi.DataAccess.dll

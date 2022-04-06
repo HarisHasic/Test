@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "mG3cxEYUwP1Zj1rByIAWitPCEOPNMHU+8DKDIoIzcaU=",
+  "Source": "oebb.efi.ui.Api",
+  "BasePath": "_content/oebb.efi.ui.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
