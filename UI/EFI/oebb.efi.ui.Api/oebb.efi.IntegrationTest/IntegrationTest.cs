@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Moq;
 using oebb.efi.DataAccess;
+using oebb.efi.Domain.Models;
 using oebb.efi.Domain.Services.Commands;
 using oebb.efi.Domain.Services.Station;
 using System;
@@ -16,7 +17,7 @@ namespace oebb.efi.IntegrationTest
     public class IntegrationTest
     {
         private readonly IMapper _mapper;
-        private readonly EfiContext _efiContext;
+        public  EfiContext _efiContext;
         public IMediator medi;
 
 
@@ -66,6 +67,24 @@ namespace oebb.efi.IntegrationTest
          
         }
         [Fact]
+        public async Task StationByDescription()
+        {
+            //Arrange
+            _efiContext.Stations.Add(new DataAccess.Entities.StationEntity { Id = 1, Shortcut = "W", Description = "Wien" });
+            _efiContext.Stations.Add(new DataAccess.Entities.StationEntity { Id = 2, Shortcut = "M", Description = "München" });
+            _efiContext.SaveChanges();
+            var finded = _efiContext.Stations.FirstOrDefaultAsync(x => x.Id == 2);
+            var handler = new GetStationByNameHandler(_efiContext, _mapper, new Mock<ILogger<GetStationByNameHandler>>().Object, medi);
+
+            //Act
+            var result = await handler.Handle(new GetStationByNameQuery("Wien"), CancellationToken.None);
+
+            //Assert
+            Assert.Equal("Wien", result.Description);
+            // Assert.Equal(finded.Result.Id, result.Description);
+
+        }
+        [Fact]
         public async Task InsertStation()
         {
             //Arrange
@@ -80,7 +99,52 @@ namespace oebb.efi.IntegrationTest
             await handler.Handle(new CreateStationRequestCommand(atest), CancellationToken.None);
             var atest2 = _efiContext.Stations.FirstOrDefaultAsync(x=>x.Id==3);
             //Assert
-            Assert.Equal("Klagenfurt", atest2.Result.Description) ;
+            Assert.Equal("Klagenfurt", atest2.Result.Description);
+            // Assert.Equal(finded.Result.Id, result.Description);
+
+        }
+        [Fact]
+        public async Task PutStation()
+        {
+            //Arrange
+            _efiContext.Stations.Add(new DataAccess.Entities.StationEntity { Id = 1, Shortcut = "W", Description = "Wien" ,SearchTerm = "Wien" });
+            _efiContext.Stations.Add(new DataAccess.Entities.StationEntity { Id = 2, Shortcut = "M", Description = "München", SearchTerm = "München" });
+             _efiContext.SaveChanges();
+            DataAccess.Entities.StationEntity atest = new DataAccess.Entities.StationEntity
+            { Id = 3, Shortcut = "K", Description = "Klagenfurt", SearchTerm = "Klagenfurt" };
+            _efiContext.Stations.AddRange(atest);
+            _efiContext.SaveChanges();
+            atest.Description = "KlagenfurtNije";
+
+            var handler = new EditStationCommandHandler(_efiContext, _mapper, new Mock<ILogger<EditStationCommandHandler>>().Object);
+            
+            //Act
+           await handler.Handle(new EditStationCommand(atest), CancellationToken.None);
+       var atest2 = _efiContext.Stations.FirstOrDefaultAsync(x => x.Id == 3);
+            //Assert
+
+           Assert.Equal("KlagenfurtNije", atest2.Result.Description);
+           Assert.Equal(3, atest2.Result.Id);
+            // Assert.Equal(finded.Result.Id, result.Description);
+
+        }
+        [Fact]
+        public async Task DeleteStation()
+        {
+            //Arrange
+            _efiContext.Stations.Add(new DataAccess.Entities.StationEntity { Id = 1, Shortcut = "W", Description = "Wien", SearchTerm = "Wien" });
+            _efiContext.Stations.Add(new DataAccess.Entities.StationEntity { Id = 2, Shortcut = "M", Description = "München", SearchTerm = "München" });
+            _efiContext.SaveChanges();
+        
+            var handler = new DeleteStationCommandHandler(_efiContext, _mapper, new Mock<ILogger<DeleteStationCommandHandler>>().Object);
+
+            //Act
+            await handler.Handle(new DeleteStationCommand(1), CancellationToken.None);
+            var atest2 = _efiContext.Stations.CountAsync();
+            //Assert
+
+           // Assert.Equal("KlagenfurtNije", atest2.Result.Description);
+            Assert.Equal(1, atest2.Result);
             // Assert.Equal(finded.Result.Id, result.Description);
 
         }
