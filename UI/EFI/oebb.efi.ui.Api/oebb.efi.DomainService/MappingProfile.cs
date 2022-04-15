@@ -9,6 +9,7 @@ namespace oebb.efi.Domain.Services
         public MappingProfile()
         {
             CreateMap<Entities.StationEntity, DomainModels.Station>();
+         
         }        
     }
 }
