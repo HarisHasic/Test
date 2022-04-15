@@ -56,24 +56,5 @@ namespace oebb.efi.ui.Api.Controllers
          
 
         }
-
-        [HttpPut]
-        public async Task<StationEntity> EditStation([FromBody]StationEntity command)
-        {
-            var model = new EditStationCommand(command);
-
-            return await _mediator.Send(model);
-
-
-        }
-        [HttpDelete]
-        public async Task<StationEntity> EditStation([FromBody] long Id)
-        {
-            var model = new DeleteStationCommand(Id);
-
-            return await _mediator.Send(model);
-
-
-        }
     }
 }

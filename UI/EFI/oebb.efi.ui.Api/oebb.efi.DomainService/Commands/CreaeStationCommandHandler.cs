@@ -29,15 +29,12 @@ namespace oebb.efi.Domain.Services.Commands
             //_context.Stations.Add(new StationEntity { Id = request.Id, SearchTerm = request.SearchTerm, Description = request.Description, Shortcut = request.Shortcut });
             //_context.SaveChanges();
             //return null;
-            StationEntity a = _mapper.Map<StationEntity>(request._StationEntity);
+            Models.Station a = _mapper.Map<Models.Station>(request._StationEntity);
           
             _context.Stations.Add(request._StationEntity);
             _context.SaveChanges();
-            _logger.LogInformation($"Logger information is here for create ro Post");
-
-            var result = Task.FromResult(_mapper.Map<StationEntity>(a));
-         
-            return await result;
+     
+            return null;
 
 
             //   _logger.LogInformation($"loaded {stations.Count} Stations from database");
