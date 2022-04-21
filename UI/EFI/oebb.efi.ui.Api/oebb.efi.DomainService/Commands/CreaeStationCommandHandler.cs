@@ -24,16 +24,16 @@ namespace oebb.efi.Domain.Services.Commands
             _logger = logger;
         }
          
-        public  async Task<StationEntity> Handle(CreateStationRequestCommand request, CancellationToken cancellationToken)
+        public  async Task<StationEntity?> Handle(CreateStationRequestCommand request, CancellationToken cancellationToken)
         {
             //_context.Stations.Add(new StationEntity { Id = request.Id, SearchTerm = request.SearchTerm, Description = request.Description, Shortcut = request.Shortcut });
             //_context.SaveChanges();
             //return null;
-            Models.Station a = _mapper.Map<Models.Station>(request._StationEntity);
+            StationEntity a = _mapper.Map<StationEntity>(request._StationEntity);
           
             _context.Stations.Add(request._StationEntity);
             _context.SaveChanges();
-     
+           // var result = Task.FromResult(_mapper.Map<StationEntity>(stations));
             return null;
 
 

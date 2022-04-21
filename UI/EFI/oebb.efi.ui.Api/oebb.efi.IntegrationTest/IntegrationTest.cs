@@ -63,6 +63,7 @@ namespace oebb.efi.IntegrationTest
             //Assert
             Assert.Equal("München", result.Description);
            // Assert.Equal(finded.Result.Id, result.Description);
+
          
         }
         [Fact]
@@ -82,6 +83,47 @@ namespace oebb.efi.IntegrationTest
             //Assert
             Assert.Equal("Klagenfurt", atest2.Result.Description) ;
             // Assert.Equal(finded.Result.Id, result.Description);
+
+        }
+        [Fact]
+        public async Task EditStation()
+        {
+            //Arrange
+            _efiContext.Stations.Add(new DataAccess.Entities.StationEntity { Id = 1, Shortcut = "W", Description = "Wien" });
+            _efiContext.Stations.Add(new DataAccess.Entities.StationEntity { Id = 2, Shortcut = "M", Description = "München" });
+            _efiContext.SaveChanges();
+            DataAccess.Entities.StationEntity newStation = new DataAccess.Entities.StationEntity
+            { Id = 3, Shortcut = "K", Description = "Klagenfurt" };
+            _efiContext.Stations.Add(newStation);
+            _efiContext.SaveChanges();
+            newStation.Description = "KlagenfurtEdited";
+            var handler = new EditStationCommandHandler(_efiContext, _mapper, new Mock<ILogger<EditStationCommandHandler>>().Object);
+
+            //Act
+            await handler.Handle(new EditStationRequestCommand(newStation), CancellationToken.None);
+            var addedStation = _efiContext.Stations.FirstOrDefaultAsync(x => x.Id == 3);
+            //Assert
+            Assert.Equal("KlagenfurtEdited", addedStation.Result.Description);
+            // Assert.Equal(finded.Result.Id, result.Description);
+
+        }
+        [Fact]
+        public async Task DeleteStation()
+        {
+            //Arrange
+            _efiContext.Stations.Add(new DataAccess.Entities.StationEntity { Id = 1, Shortcut = "W", Description = "Wien" });
+            _efiContext.Stations.Add(new DataAccess.Entities.StationEntity { Id = 2, Shortcut = "M", Description = "München" });
+            _efiContext.SaveChanges();
+           
+          
+            var handler = new DeleteStationCommandHandler(_efiContext, _mapper, new Mock<ILogger<DeleteStationCommandHandler>>().Object);
+
+            //Act
+            await handler.Handle(new DeleteStationRequestCommand(1), CancellationToken.None);
+            
+            //Assert
+            Assert.Equal(1, _efiContext.Stations.CountAsync().Result);
+         
 
         }
     }
